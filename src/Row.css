@@ -1,0 +1,50 @@
+.row {
+  margin-left: 20px;
+}
+
+.row h2 {
+  margin-left: 20px;
+  color: #fff;
+  font-size: 1.4vw;
+}
+
+.row__posters {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  padding: 20px;
+}
+
+.row__posters::-webkit-scrollbar {
+  display: none;
+}
+
+.row__poster {
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  max-height: 150px;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+  margin-right: 10px;
+}
+
+.row__poster:hover {
+  -webkit-transform: scale(1.08);
+          transform: scale(1.08);
+}
+
+.row__posterLarge {
+  max-height: 250px;
+}
+
+.row__posterLarge:hover {
+  -webkit-transform: scale(1.09);
+          transform: scale(1.09);
+}
+/*# sourceMappingURL=Row.css.map */
