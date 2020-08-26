@@ -57,4 +57,9 @@
 .nav__menu li {
   padding: 10px;
 }
+
+.nav__menu li a {
+  text-decoration: none;
+  color: #fff;
+}
 /*# sourceMappingURL=Nav.css.map */
