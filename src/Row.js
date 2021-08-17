@@ -3,6 +3,7 @@ import axios from "./axios";
 import "./Row.css";
 import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
+import Modal from "react-modal";
 
 // Base url for movie posters
 const base_url = "https://image.tmdb.org/t/p/original/";
@@ -20,7 +21,28 @@ function Row({ title, fetchUrl, isLargeRow }) {
   const [movies, setMovies] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
 
-  console.log(movies);
+  let modalKey = useState("");
+  Modal.setAppElement("#root");
+
+  let subtitle;
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  const openModal = (movie) => {
+    setIsOpen(true);
+    modalKey = movie;
+    console.log(modalKey);
+  };
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = "#f00";
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  // console.log(movies);
 
   //  runs based on a specific conditions/variables
   useEffect(() => {
@@ -34,28 +56,18 @@ function Row({ title, fetchUrl, isLargeRow }) {
     fetchData();
   }, [fetchUrl]);
 
-  const handleClick = (movie) => {
-    if (trailerUrl) {
-      setTrailerUrl("");
-    } else {
-      movieTrailer(movie?.name || movie?.title || "")
-        .then((url) => {
-          const urlParams = new URLSearchParams(new URL(url).search);
-          setTrailerUrl(urlParams.get("v")); // Gets vid ID value from url
-        })
-        .catch((error) => console.log(error));
-    }
-  };
+  // const handleClick = () => {
+  //   return <p>{movie.name}</p>;
+  // };
   return (
     <div className="row">
       <h2>{title}</h2>
       <div className="row__posters">
         {/* posters */}
-
         {movies.map((movie) => (
           <img
             key={movie.id}
-            onClick={() => handleClick(movie)}
+            onClick={() => openModal(movie.id)}
             className={`row__poster ${isLargeRow && "row__posterLarge"}`}
             src={`${base_url}${
               isLargeRow ? movie.poster_path : movie.backdrop_path
@@ -64,8 +76,17 @@ function Row({ title, fetchUrl, isLargeRow }) {
             loading="lazy"
           />
         ))}
-        <p>hej</p>
       </div>
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        contentLabel="Example Modal"
+      >
+        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
+        <button onClick={closeModal}>close</button>
+        <p></p>
+      </Modal>
       {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
       {/*  container > posters/images */}
     </div>
