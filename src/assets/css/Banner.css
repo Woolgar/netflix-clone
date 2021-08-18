@@ -1,7 +1,7 @@
 .banner {
   color: #fff;
   object-fit: contain;
-  height: 448px;
+  height: 80vh;
 }
 
 .banner__title {
@@ -44,14 +44,14 @@
   width: 45rem;
   font-size: 1.2rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
-  margin-top: .1vw;
+  margin-top: 0.1vw;
   max-width: 360px;
   height: 80px;
   margin-bottom: 50px;
 }
 
 .banner--fadeBottom {
-  height: 14.4rem;
+  height: 95vh;
   background-image: linear-gradient(180deg, transparent, #252525, #111);
 }
 /*# sourceMappingURL=Banner.css.map */
